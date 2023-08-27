@@ -50,7 +50,7 @@ class LkGAN(object):
         self.n_epochs = opt.n_epochs
         self.gp = opt.gp
         self.scores = np.zeros(self.n_epochs)
-        self.num_images = 10000
+        self.num_images = opt.num_images
         self.gp_coef = opt.gp_coef
         self.d_opt = Adam(2e-4, beta_1 = 0.5)
         self.g_opt = Adam(2e-4, beta_1 = 0.5)
