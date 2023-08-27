@@ -46,7 +46,7 @@ class AlphaGAN(object):
         self.n_epochs = opt.n_epochs
         self.gp = opt.gp
         self.scores = np.zeros(self.n_epochs)
-        self.num_images = 10000
+        self.num_images = opt.num_images
         self.gp_coef = opt.gp_coef
         if self.dataset != 'cifar10':
             self.num_images = 10000
