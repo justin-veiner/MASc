@@ -308,9 +308,11 @@ class LkGAN(object):
 
 
     def build_directory(self):
+        '''
         SEEDS = [123, 1600, 60677, 15859, 79878]
         if self.dataset == 'mnist':
             SEEDS = [123, 500, 1600, 199621, 60677, 20435, 15859, 33764, 79878, 36123]
+        '''
         make_directory('LkGAN')
         make_directory(f'LkGAN/{self.loss_type}')
         make_directory(f'LkGAN/{self.loss_type}/{self.dataset}')
@@ -318,9 +320,9 @@ class LkGAN(object):
             make_directory(f'LkGAN/{self.loss_type}/{self.dataset}/k-{self.k}')
         except FileExistsError:
             pass
-        #subfolders = [f[0] for f in os.walk(f'AlphaGAN/{self.dataset}/alpha-d{self.alpha_d}-g{self.alpha_g}')]
-        #folders = [f for f in subfolders if f.startswith(f'AlphaGAN/{self.dataset}/alpha-d{self.alpha_d}-g{self.alpha_g}/v')]
-        '''
+        subfolders = [f[0] for f in os.walk(f'AlphaGAN/{self.dataset}/alpha-d{self.alpha_d}-g{self.alpha_g}')]
+        folders = [f for f in subfolders if f.startswith(f'AlphaGAN/{self.dataset}/alpha-d{self.alpha_d}-g{self.alpha_g}/v')]
+       
         versions = [f.split('/v')[1] for f in folders]
         versions = [int(v) for v in versions if v.isnumeric()]
         version = 1
@@ -336,8 +338,8 @@ class LkGAN(object):
                 folder_created = True
             except:
                 version += 1
+  
         '''
-
         version = SEEDS.index(self.seed) + 1
         if self.gp and self.l1:
             version = version + 15 if self.dataset != 'mnist' else version + 30
@@ -345,8 +347,9 @@ class LkGAN(object):
             version = version + 5 if self.dataset != 'mnist' else version + 10
         elif self.l1:
             version = version + 10 if self.dataset != 'mnist' else version + 20
+        '''
         self.path = f'LkGAN/{self.loss_type}/{self.dataset}/k-{self.k}/v'+str(version)
-     
+         
         make_directory(self.path)
         make_directory(self.path + '/metrics')
         make_directory(self.path + '/metrics/accuracy')
