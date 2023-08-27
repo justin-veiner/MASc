@@ -280,17 +280,19 @@ class AlphaGAN(object):
         gan_name = 'AlphaGAN'
         if self.alpha_d == 1.0 and self.alpha_g == 1.0:
             gan_name = 'VanillaGAN'
+        '''
         SEEDS = [123, 1600, 60677, 15859, 79878]
         if self.dataset == 'mnist':
             SEEDS = [123, 500, 1600, 199621, 60677, 20435, 15859, 33764, 79878, 36123]
+        '''
         make_directory(gan_name)
         make_directory(f'{gan_name}/{self.dataset}')
         if gan_name == 'AlphaGAN':
             make_directory(f'{gan_name}/{self.dataset}/alpha-d{self.alpha_d}-g{self.alpha_g}')
 
-        #subfolders = [f[0] for f in os.walk(f'AlphaGAN/{self.dataset}/alpha-d{self.alpha_d}-g{self.alpha_g}')]
-        #folders = [f for f in subfolders if f.startswith(f'AlphaGAN/{self.dataset}/alpha-d{self.alpha_d}-g{self.alpha_g}/v')]
-        '''
+        subfolders = [f[0] for f in os.walk(f'AlphaGAN/{self.dataset}/alpha-d{self.alpha_d}-g{self.alpha_g}')]
+        folders = [f for f in subfolders if f.startswith(f'AlphaGAN/{self.dataset}/alpha-d{self.alpha_d}-g{self.alpha_g}/v')]
+        
         versions = [f.split('/v')[1] for f in folders]
         versions = [int(v) for v in versions if v.isnumeric()]
         version = 1
@@ -315,6 +317,7 @@ class AlphaGAN(object):
             version = version + 5 if self.dataset != 'mnist' else version + 10
         elif self.l1:
             version = version + 10 if self.dataset != 'mnist' else version + 20
+        '''
         self.path = f'{gan_name}/{self.dataset}/alpha-d{self.alpha_d}-g{self.alpha_g}/v'+str(version)
         if gan_name == 'VanillaGAN':
             self.path = f'{gan_name}/{self.dataset}/v'+str(version)
